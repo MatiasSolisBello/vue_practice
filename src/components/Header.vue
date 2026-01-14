@@ -7,7 +7,9 @@
   <header>
     <nav class="navbar bg-dark bg-body-tertiary" data-bs-theme="dark">
       <div class="container">
-        <a class="navbar-brand" href="#">{{ message }}</a>
+        <router-link to="/" class="navbar-brand">
+          {{ message }}
+        </router-link>
       </div>
     </nav>
   </header>

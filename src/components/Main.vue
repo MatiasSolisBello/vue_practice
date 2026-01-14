@@ -24,9 +24,10 @@
             <p class="card-text">$ {{ i.price }}</p>
             <span class="badge rounded-pill text-bg-info">{{ i.category }}</span>
             <div class="d-grid gap-2 mt-3">
-              <button type="button" class="btn btn-outline-primary">
+              <router-link :to="'/details/' + i.id" 
+                type="button" class="btn btn-outline-primary">
                 Details
-              </button>
+              </router-link>
             </div>
           </div>
         </div>
