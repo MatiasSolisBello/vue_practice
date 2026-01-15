@@ -50,6 +50,7 @@ onMounted(async () => {
             </div>
         </div>
     </div>
+    <br>
 </template>
 
 <style>
