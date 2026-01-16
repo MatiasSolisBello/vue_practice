@@ -21,7 +21,7 @@ const message = ref('Footer') */
 
 <style scoped>
   footer {
-    background-color: #f8f9fa;
+    background-color: var(--bg);
     padding: 20px;
     text-align: center;
     border-top: 1px solid #e0e0e0;

@@ -79,4 +79,14 @@ watch(selectedCategory, () => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.card {
+  background-color: var(--card-bg);
+  color: var(--text);
+  border: 1px solid var(--card-border);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+</style>
