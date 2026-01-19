@@ -17,6 +17,13 @@ onMounted(() => {
         <router-link to="/" class="navbar-brand">
           {{ message }}
         </router-link>
+
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <router-link to="/grafics" class="nav-link">
+            Graficos
+          </router-link>
+        </ul>
+        
         <button class="theme-btn" @click="theme.toggle()">
           {{ theme.dark ? '☀️ Claro' : '🌙 Oscuro' }}
         </button>
@@ -41,6 +48,10 @@ onMounted(() => {
   --btn-text: #f8fafc;
 
   --footer-color: #1e293b;
+}
+
+.nav-link {
+  color: var(--text);
 }
 
 body {
