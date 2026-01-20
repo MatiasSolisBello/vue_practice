@@ -2,13 +2,13 @@
 import { ref, onMounted } from 'vue'
 import { Bar } from 'vue-chartjs'
 import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale
+    Chart as ChartJS,
+    Title,
+    Tooltip,
+    Legend,
+    BarElement,
+    CategoryScale,
+    LinearScale
 } from 'chart.js'
 import { fetchProducts, productsByCategory } from '@/stores/api.js'
 

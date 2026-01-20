@@ -8,6 +8,7 @@ export async function fetchProducts() {
     return data;
 }
 
+// Obtener productos por categoria
 export function productsByCategory(products) {
     return products.reduce((acc, product) => {
         const category = product.category
@@ -16,30 +17,32 @@ export function productsByCategory(products) {
     }, {})
 }
 
+// Promedio de precio por categoria
 export function avgPriceByCategory(products) {
     const grouped = {}
 
+    // forEach: Recorrer elementos que son parte de un arreglo
     products.forEach(p => {
-    if (!grouped[p.category]) {
-        grouped[p.category] = {
-        total: 0,
-        count: 0
+        if (!grouped[p.category]) {
+            grouped[p.category] = {
+                total: 0,
+                count: 0
+            }
         }
-    }
-
-    grouped[p.category].total += p.price
-    grouped[p.category].count += 1
+        grouped[p.category].total += p.price
+        grouped[p.category].count += 1
     })
 
     // devolver { category: avgPrice }
     return Object.fromEntries(
-    Object.entries(grouped).map(([category, data]) => [
-        category,
-        Number((data.total / data.count).toFixed(2))
-    ])
+        Object.entries(grouped).map(([category, data]) => [
+            category,
+            Number((data.total / data.count).toFixed(2))
+        ])
     )
 }
 
+// Contar productos por categoria
 export function countProductsByCategory(products) {
   return products.reduce((acc, product) => {
     acc[product.category] = (acc[product.category] || 0) + 1

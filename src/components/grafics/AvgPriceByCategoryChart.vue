@@ -2,15 +2,14 @@
 import { ref, onMounted } from 'vue'
 import { Bar } from 'vue-chartjs'
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Tooltip,
-  Title,
-  Legend
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Tooltip,
+    Title,
+    Legend
 } from 'chart.js'
-
 import { fetchProducts, avgPriceByCategory } from '@/stores/api.js'
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
@@ -18,15 +17,15 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 const chartData = ref(null)
 
 const chartOptions = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top'
-    },
-    title: {
-      display: true,
+    responsive: true,
+    plugins: {
+        legend: {
+            position: 'top'
+        },
+        title: {
+            display: true,
+        }
     }
-  }
 }
 
 // Cargamos los datos del gráfico al montar el componente
@@ -64,15 +63,15 @@ onMounted(async () => {
 <style scoped>
 
 .charts {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-  max-width: 800px;
-  margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .chart {
-  width: 100%;
+    width: 100%;
 }
 </style>

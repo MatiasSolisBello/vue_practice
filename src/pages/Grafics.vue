@@ -9,8 +9,11 @@ import Header from '@/components/Header.vue'
   <Header />
   <h1>Gráficos</h1>
   <ProductsByCategoryChart />
+  <br>
   <AvgPriceByCategoryChart />
+  <br>
   <CountProductsByCategory />
+  <br>
 </template>
 
 <style scoped>

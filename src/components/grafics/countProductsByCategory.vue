@@ -19,38 +19,35 @@ ChartJS.register(
 const chartData = ref(null)
 
 const chartOptions = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'bottom'
-    },
-    tooltip: {
-      callbacks: {
-        label: ctx => `${ctx.label}: ${ctx.raw} productos`
-      }
+    responsive: true,
+    plugins: {
+            legend: {
+            position: 'bottom'
+        },
+        tooltip: {
+        callbacks: {
+            label: ctx => `${ctx.label}: ${ctx.raw} productos`
+        }
+        }
     }
-  }
 }
 
 onMounted(async () => {
-  const products = await fetchProducts()
-  const grouped = countProductsByCategory(products)
-  console.log(grouped);
+    const products = await fetchProducts()
+    const grouped = countProductsByCategory(products)
 
-  chartData.value = {
-    labels: Object.keys(grouped),
-    datasets: [
-      {
-        data: Object.values(grouped),
-        backgroundColor: [
-            'rgb(99, 122, 255)',
-            'rgb(227, 255, 74)',
-            'rgb(74, 255, 246)',
-            'rgb(186, 74, 255)'
-        ],
-      }
-    ]
-  }
+    chartData.value = {
+        labels: Object.keys(grouped),
+        datasets: [{
+            data: Object.values(grouped),
+            backgroundColor: [
+                'rgb(99, 122, 255)',
+                'rgb(227, 255, 74)',
+                'rgb(74, 255, 246)',
+                'rgb(186, 74, 255)'
+            ],
+        }]
+    }
 })
 </script>
 
