@@ -23,6 +23,12 @@ onMounted(() => {
                         Graficos
                     </router-link>
                 </ul>
+
+                <ul class="navbar-nav me-auto mb-1">
+                    <router-link to="/tecno-market" class="nav-link">
+                        TecnoMarket
+                    </router-link>
+                </ul>
                 
                 <button class="theme-btn" @click="theme.toggle()">
                     {{ theme.dark ? '☀️ Claro' : '🌙 Oscuro' }}
