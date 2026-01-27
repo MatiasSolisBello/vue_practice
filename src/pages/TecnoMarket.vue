@@ -6,23 +6,42 @@ const products = ref([])
 const loading = ref(false)
 const error = ref(null)
 
+// Obtener datos de la API
 const fetchTecnoMarket = async () => {
     loading.value = true
     error.value = null
 
     try {
         const res = await fetch('http://127.0.0.1:8000/api/products/')
-
-        if (!res.ok) {
-            throw new Error(`Error HTTP: ${res.status}`)
-        }
-
+        if (!res.ok) throw new Error(`Error HTTP: ${res.status}`)
         products.value = await res.json()
     } catch (err) {
         console.error(err)
         error.value = 'No se pudieron cargar los productos 💀'
     } finally {
         loading.value = false
+    }
+}
+
+// Eliminar producto
+const deleteProduct = async (id) => {
+    const confirmDelete = confirm('¿Seguro que querés borrar este producto?')
+    if (!confirmDelete) return
+
+    try {
+        const res = await fetch(
+            `http://127.0.0.1:8000/api/products/${id}/`,
+            { method: 'DELETE' }
+        )
+
+        if (!res.ok) throw new Error('Error al eliminar')
+
+        // 🧼 Actualizar lista SIN recargar
+        products.value = products.value.filter(p => p.id !== id)
+
+    } catch (err) {
+        console.error(err)
+        alert('No se pudo eliminar el producto 💥')
     }
 }
 
@@ -39,9 +58,9 @@ onMounted(fetchTecnoMarket)
             </div>
 
             <div class="col-md-2">
-                <a class="btn btn-success float-right" href="#">
+                <router-link :to="'tecno-market/create/'" type="button" class="btn btn-success float-right">
                     Agregar producto
-                </a>
+                </router-link>
             </div>
         </div>
 
@@ -76,10 +95,16 @@ onMounted(fetchTecnoMarket)
                     <td>{{ product.description }}</td>
                     <td>{{ product.name_brand }}</td>
                     <td>
-                        <button class="btn btn-warning btn-sm">Edit</button>
+                        <router-link :to="'tecno-market/edit/' + product.id" type="button"
+                            class="btn btn-warning btn-sm">
+                            Edit
+                        </router-link>
                     </td>
                     <td>
-                        <button class="btn btn-danger btn-sm">Delete</button>
+                        <button class="btn btn-danger btn-sm" 
+                            @click="deleteProduct(product.id)">
+                            Delete
+                        </button>
                     </td>
                 </tr>
             </tbody>
@@ -92,5 +117,4 @@ onMounted(fetchTecnoMarket)
 </template>
 
 <style scoped>
-
 </style>
