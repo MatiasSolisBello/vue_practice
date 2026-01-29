@@ -1,4 +1,5 @@
 <script setup>
+import Swal from 'sweetalert2'
 import { ref, onMounted, computed } from 'vue'
 import Header from '@/components/Header.vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -75,14 +76,28 @@ const createProduct = async () => {
                 errors.value = data
                 return
             }
-            throw new Error('Algo salió mal, Django está llorando')
+            Swal.fire({
+                title: 'Algo salió mal, Django está llorando',
+                icon: 'error',
+                draggable: true
+            })
+            throw new Error('')
         }
         const data = await res.json()
+        Swal.fire({
+            title: 'Cambios realizados exitosamente',
+            icon: 'success',
+            draggable: true
+        })
         router.push('/tecno-market')
 
     } catch (error) {
         console.error(error)
-        alert('Error general. Probá más tarde.')
+        Swal.fire({
+            title: 'Error general. Probá más tarde.',
+            icon: 'error',
+            draggable: true
+        })
     }
 }
 

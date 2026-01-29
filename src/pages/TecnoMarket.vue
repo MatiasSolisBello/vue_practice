@@ -1,4 +1,5 @@
 <script setup>
+import Swal from 'sweetalert2'
 import { ref, onMounted } from 'vue'
 import Header from '@/components/Header.vue'
 
@@ -25,8 +26,17 @@ const fetchTecnoMarket = async () => {
 
 // Eliminar producto
 const deleteProduct = async (id) => {
-    const confirmDelete = confirm('¿Seguro que querés borrar este producto?')
-    if (!confirmDelete) return
+    const result = await Swal.fire({
+        title: '¿Eliminar producto?',
+        text: 'Esta acción no se puede deshacer (como mensajes enviados a tu ex)',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar',
+        reverseButtons: true
+    })
+
+    if (!result.isConfirmed) return
 
     try {
         const res = await fetch(
@@ -34,14 +44,24 @@ const deleteProduct = async (id) => {
             { method: 'DELETE' }
         )
 
-        if (!res.ok) throw new Error('Error al eliminar')
+        if (!res.ok) {
+            throw new Error('El backend dijo que no, y tiene razón')
+        }
 
-        // 🧼 Actualizar lista SIN recargar
+        Swal.fire({
+            title: 'Producto eliminado',
+            text: 'QEPD 🪦',
+            icon: 'success'
+        })
+        // Actualizar lista sin recargar (Vue-friendly)
         products.value = products.value.filter(p => p.id !== id)
 
     } catch (err) {
-        console.error(err)
-        alert('No se pudo eliminar el producto 💥')
+        Swal.fire({
+            title: 'No se pudo eliminar',
+            text: err.message ?? 'Error inesperado',
+            icon: 'error'
+        })
     }
 }
 
@@ -101,8 +121,7 @@ onMounted(fetchTecnoMarket)
                         </router-link>
                     </td>
                     <td>
-                        <button class="btn btn-danger btn-sm" 
-                            @click="deleteProduct(product.id)">
+                        <button class="btn btn-danger btn-sm" @click="deleteProduct(product.id)">
                             Delete
                         </button>
                     </td>
@@ -116,5 +135,4 @@ onMounted(fetchTecnoMarket)
     </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
